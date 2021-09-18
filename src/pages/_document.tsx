@@ -7,7 +7,7 @@ export default class MyDocument extends Document {
                 <Head>
                     <link rel="preconnect" href="https://fonts.gstatic.com"/>
                     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet"/>
-                    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon"></link>
+                    <link rel="shortcut icon" href="favicon.png?cache=18-09-2021T12:26:00" type="image/x-icon"></link>
                 </Head>
                 <body>
                     <Main />
