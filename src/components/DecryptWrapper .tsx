@@ -1,0 +1,54 @@
+import * as C from "@chakra-ui/react";
+import React, { useState } from "react";
+import { api } from "../services/api";
+import { Button } from "./Button";
+import { Textarea } from "./Textarea";
+
+export function DecryptWrapper(props: C.StackProps) {
+    const [ data, setData ] = useState('');
+    const [ decryptedData, setDecryptedData ] = useState('');
+
+    function handleChangeData(e) {
+        setData(e.target.value);
+    }
+
+    async function handleDecryptData() {
+        try {
+            const response = await api.get(`/decrypt?data=${data}`);
+            const dataDecrypted = response.data.decryptedData
+            setDecryptedData(dataDecrypted)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+    
+    return (
+        <C.Grid 
+            gap="4" 
+            templateColumns={["1fr", "1fr", "1fr 0.3fr 1fr"]} 
+            justify="center" 
+            spacing="4" 
+            w="100%" 
+            maxW="1120px" 
+            px="6" 
+            {...props}
+        >
+            <C.GridItem>
+                <Textarea 
+                    placeholder="Digite os dados para serem encriptados" 
+                    onChange={handleChangeData} 
+                    value={data} 
+                    title="Dados:"
+                />
+            </C.GridItem>
+
+            <C.GridItem display="flex" justifyContent="center" alignItems="center">
+                <Button onClick={handleDecryptData}>Desencriptar</Button>
+            </C.GridItem>
+
+            <C.GridItem>
+                <Textarea value={decryptedData} isReadOnly title="Resultado:"/>
+            </C.GridItem>
+        </C.Grid>
+    )
+}
