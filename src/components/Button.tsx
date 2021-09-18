@@ -3,9 +3,10 @@ import * as C from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 
 interface Props extends C.ButtonProps {
+    isLoading?: boolean;
 }
 
-export function Button({...rest }: Props) {
+export function Button({isLoading = false, ...rest }: Props) {
     const isWideVersion = C.useBreakpointValue({
         base: false,
         md: true,
@@ -19,9 +20,20 @@ export function Button({...rest }: Props) {
             alignSelf="center"
             {...rest}
         >
-            {isWideVersion 
-                ? <ArrowRightIcon />
-                : < ArrowDownIcon />
+            {!isLoading && (
+                isWideVersion 
+                    ? <ArrowRightIcon />
+                    : < ArrowDownIcon />
+                
+            )}
+
+            {isLoading && 
+                <C.Spinner 
+                    color="light" 
+                    size="sm"
+                    speed="0.5s"
+                    emptyColor="blue.200"
+                />
             }
         </C.Button>
     )

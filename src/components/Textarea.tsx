@@ -6,7 +6,13 @@ interface Props extends C.TextareaProps {
 export function Textarea({ title, ...rest }: Props) {
     return (
         <C.Box w="100%">
-            <C.FormLabel color="light" fontSize="lg" fontWeight="bold">{title}</C.FormLabel>
+            <C.FormLabel 
+                color="light" 
+                fontSize="lg" 
+                fontWeight="bold"
+            >
+                {title}
+            </C.FormLabel>
             <C.Textarea 
                 borderColor="card"
                 bg="card" 

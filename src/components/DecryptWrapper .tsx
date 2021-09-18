@@ -7,18 +7,23 @@ import { Textarea } from "./Textarea";
 export function DecryptWrapper(props: C.StackProps) {
     const [ data, setData ] = useState('');
     const [ decryptedData, setDecryptedData ] = useState('');
+    const [ loading, setLoading ] = useState(false);
 
     function handleChangeData(e) {
         setData(e.target.value);
     }
 
     async function handleDecryptData() {
+        setLoading(true);
+
         try {
             const response = await api.get(`/decrypt?data=${data}`);
             const dataDecrypted = response.data.decryptedData
             setDecryptedData(dataDecrypted)
         } catch(err) {
             console.log(err)
+        } finally {
+            setLoading(false);
         }
     }
     
@@ -43,7 +48,7 @@ export function DecryptWrapper(props: C.StackProps) {
             </C.GridItem>
 
             <C.GridItem display="flex" justifyContent="center" alignItems="center">
-                <Button onClick={handleDecryptData} />
+                <Button isLoading={loading} onClick={handleDecryptData} />
             </C.GridItem>
 
             <C.GridItem>
