@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import Cryptr from "cryptr";
 import { AppError } from '../../services/error/AppError';
-const cryptr = new Cryptr('btrsi');
+const cryptr = new Cryptr(process.env.CRYPTO_KEY);
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { data } = req.query;
