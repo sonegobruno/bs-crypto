@@ -1,6 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
+## Iniciando projeto
 
 First, run the development server:
 
@@ -9,26 +7,38 @@ npm run dev
 # or
 yarn dev
 ```
+h2 align="center">BS-Crypto</h2>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+___
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<h3 align="center">
+  <a href="#information_source-sobre">Sobre</a>&nbsp;|&nbsp;
+  <a href="#interrobang-motivo">Motivo</a>&nbsp;|&nbsp;
+  <a href="#seedling-requisitos-mínimos">Requisitos</a>&nbsp;|&nbsp;
+  <a href="#rocket-tecnologias-utilizadas">Tecnologias</a>&nbsp;|&nbsp;
+</h3>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+___
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<img src="/images/image1.png" width="375">
+<img src="/images/image2.png" width="375">
+<img src="/images/image3.png" width="375">
 
-## Learn More
+## :information_source: Sobre
 
-To learn more about Next.js, take a look at the following resources:
+Este projeto se trata de um codificador e decodificador de dados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## :interrobang: Motivo
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Principal motivição do projeto é possuir meu próprio codificador de dados.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## :rocket: Tecnologias Utilizadas 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+O projeto foi desenvolvido utilizando as seguintes tecnologias
+
+- Next.JS
+- ReactJS
+- Typescript
+- Chakra UI
+- Crypto
