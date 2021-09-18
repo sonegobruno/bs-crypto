@@ -1,6 +1,7 @@
 import * as C from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { config } from "../configs/toastConfig";
+import { DECRYPT_KEY } from "../constants/storageKeys";
 import { api } from "../services/api";
 import { Button } from "./Button";
 import { Textarea } from "./Textarea";
@@ -12,6 +13,15 @@ export function DecryptWrapper(props: C.StackProps) {
     const [ decryptedData, setDecryptedData ] = useState('');
     const [ loading, setLoading ] = useState(false);
 
+    useEffect(() => {
+        const storageData = sessionStorage.getItem(DECRYPT_KEY)
+        if(storageData) {
+            const parsedStorageData = JSON.parse(storageData)
+            setDecryptedData(parsedStorageData.dataDecrypted)
+            setData(parsedStorageData.data)
+        }
+    },[])
+
     function handleChangeData(e) {
         setData(e.target.value);
     }
@@ -21,13 +31,23 @@ export function DecryptWrapper(props: C.StackProps) {
 
         try {
             const response = await api.get(`/decrypt?data=${data}`);
+
             const dataDecrypted = response.data.decryptedData
+
             setDecryptedData(dataDecrypted)
             
             toast(config.success('Parabéns, seus dados foram decodificados com sucesso.'));
 
+            const storageData = {
+                data,
+                dataDecrypted
+            }
+
+            sessionStorage.setItem(DECRYPT_KEY, JSON.stringify(storageData))
         } catch(err) {
             console.error(err)
+
+            sessionStorage.removeItem(DECRYPT_KEY)
 
             const { message } = err.response.data;
             toast(config.error(message));

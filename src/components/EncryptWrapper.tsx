@@ -1,6 +1,7 @@
 import * as C from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { config } from "../configs/toastConfig";
+import { ENCRYPT_KEY } from "../constants/storageKeys";
 import { api } from "../services/api";
 import { Button } from "./Button";
 import { Textarea } from "./Textarea";
@@ -12,6 +13,15 @@ export function EncryptWrapper(props: C.StackProps) {
     const [ encryptedData, setEncryptedData ] = useState('');
     const [ loading, setLoading ] = useState(false);
 
+    useEffect(() => {
+        const storageData = sessionStorage.getItem(ENCRYPT_KEY)
+        if(storageData) {
+            const parsedStorageData = JSON.parse(storageData)
+            setEncryptedData(parsedStorageData.dataEncrypted)
+            setData(parsedStorageData.data)
+        }
+    },[])
+
     function handleChangeData(e) {
         setData(e.target.value);
     }
@@ -21,11 +31,24 @@ export function EncryptWrapper(props: C.StackProps) {
         
         try {
             const response = await api.get(`/encrypt?data=${data}`);
-            const dataEncrypted = response.data.encryptedData
+
+            const dataEncrypted = response.data.encryptedData;
+            
             setEncryptedData(dataEncrypted)
+
             toast(config.success('Parabéns, seus dados foram codificados com sucesso.'));
+            
+            const storageData = {
+                data,
+                dataEncrypted
+            }
+
+            sessionStorage.setItem(ENCRYPT_KEY, JSON.stringify(storageData))
+
         } catch(err) {
             console.log(err)
+
+            sessionStorage.removeItem(ENCRYPT_KEY)
 
             const { message } = err.response.data;
             toast(config.error(message));
