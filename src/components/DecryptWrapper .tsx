@@ -1,10 +1,13 @@
 import * as C from "@chakra-ui/react";
 import React, { useState } from "react";
+import { config } from "../configs/toastConfig";
 import { api } from "../services/api";
 import { Button } from "./Button";
 import { Textarea } from "./Textarea";
 
 export function DecryptWrapper(props: C.StackProps) {
+    const toast = C.useToast();
+
     const [ data, setData ] = useState('');
     const [ decryptedData, setDecryptedData ] = useState('');
     const [ loading, setLoading ] = useState(false);
@@ -20,8 +23,17 @@ export function DecryptWrapper(props: C.StackProps) {
             const response = await api.get(`/decrypt?data=${data}`);
             const dataDecrypted = response.data.decryptedData
             setDecryptedData(dataDecrypted)
+            
+            toast(config.success('Parabéns, seus dados foram decodificados com sucesso.'));
+
         } catch(err) {
-            console.log(err)
+            console.error(err)
+
+            const { message } = err.response.data;
+            toast(config.error(message));
+
+            setDecryptedData('')
+
         } finally {
             setLoading(false);
         }
@@ -30,7 +42,7 @@ export function DecryptWrapper(props: C.StackProps) {
     return (
         <C.Grid 
             gap="4" 
-            templateColumns={["1fr", "1fr", "1fr 0.3fr 1fr"]} 
+            templateColumns={["1fr", "1fr", "1fr 0.2fr 1fr"]} 
             justify="center" 
             spacing="4" 
             w="100%" 
@@ -40,10 +52,10 @@ export function DecryptWrapper(props: C.StackProps) {
         >
             <C.GridItem>
                 <Textarea 
-                    placeholder="Digite os dados para serem decodificados" 
+                    placeholder="Digite a chave para ser decodificada" 
                     onChange={handleChangeData} 
                     value={data} 
-                    title="Digite aqui com os dados:"
+                    title="Digite aqui a chave:"
                 />
             </C.GridItem>
 

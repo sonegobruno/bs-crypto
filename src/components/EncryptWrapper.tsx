@@ -1,10 +1,13 @@
 import * as C from "@chakra-ui/react";
 import { useState } from "react";
+import { config } from "../configs/toastConfig";
 import { api } from "../services/api";
 import { Button } from "./Button";
 import { Textarea } from "./Textarea";
 
 export function EncryptWrapper(props: C.StackProps) {
+    const toast = C.useToast();
+
     const [ data, setData ] = useState('');
     const [ encryptedData, setEncryptedData ] = useState('');
     const [ loading, setLoading ] = useState(false);
@@ -20,8 +23,14 @@ export function EncryptWrapper(props: C.StackProps) {
             const response = await api.get(`/encrypt?data=${data}`);
             const dataEncrypted = response.data.encryptedData
             setEncryptedData(dataEncrypted)
+            toast(config.success('Parabéns, seus dados foram codificados com sucesso.'));
         } catch(err) {
             console.log(err)
+
+            const { message } = err.response.data;
+            toast(config.error(message));
+
+            setEncryptedData('');
         } finally {
             setLoading(false);
         }

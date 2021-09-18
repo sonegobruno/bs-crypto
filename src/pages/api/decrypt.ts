@@ -7,9 +7,15 @@ const cryptr = new Cryptr('btrsi');
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { data } = req.query;
 
-  const decryptedData = cryptr.decrypt(data as string)
+  try {
+    const decryptedData = cryptr.decrypt(data as string)
 
-  res.status(200).json({ decryptedData })
+    res.status(200).json({ decryptedData })
+  } catch(err) {
+    console.log('Erro -> ', err)
 
-
+    res.status(400).json({ 
+      message: 'opss, ocorreu um erro ao decodificar seus dados. Por favor, verifique se digitou corretamente a chave.' 
+    })
+  }
 }

@@ -2,12 +2,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import Cryptr from "cryptr";
+import { AppError } from '../../services/error/AppError';
 const cryptr = new Cryptr('btrsi');
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { data } = req.query;
 
-  const encryptedData = cryptr.encrypt(data as string)
+  try {
+    const dataIsEmpty = data === '';
 
-  res.status(200).json({ encryptedData })
+    if(dataIsEmpty) {
+      throw new AppError('opss, vocẽ esqueceu de digitar os dados para serem codificados!', 400)
+    }
+
+    const encryptedData = cryptr.encrypt(data as string)
+  
+    res.status(200).json({ encryptedData })
+
+  } catch(err) {
+    console.log('Erro ->', err)
+
+    if(err.statusCode === 400) {
+      res.status(400).json({ 
+        message: err.message 
+      });
+
+      return
+    }
+
+    res.status(500).json({ 
+      message: 'opss, ocorreu um erro interno. Por favor, tente mais tarde' 
+    })
+  }
 }
