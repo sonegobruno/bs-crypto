@@ -1,22 +1,28 @@
-import { ArrowRightIcon } from "@chakra-ui/icons";
+import { ArrowDownIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import * as C from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 
 interface Props extends C.ButtonProps {
-    children: ReactNode;
 }
 
-export function Button({ children, ...rest }: Props) {
+export function Button({...rest }: Props) {
+    const isWideVersion = C.useBreakpointValue({
+        base: false,
+        md: true,
+    });
+
     return (
         <C.Button 
             colorScheme="blue" 
-            rightIcon={<ArrowRightIcon />}
             w="100%"
-            maxW="140px"
+            maxW="60px"
             alignSelf="center"
             {...rest}
         >
-            {children}
+            {isWideVersion 
+                ? <ArrowRightIcon />
+                : < ArrowDownIcon />
+            }
         </C.Button>
     )
 }
