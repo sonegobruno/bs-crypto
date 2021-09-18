@@ -23,20 +23,20 @@ export function EncryptWrapper(props: C.StackProps) {
     }
 
     return (
-        <C.Grid gap="4" templateColumns={["1fr", "1fr", "1fr 0.3fr 1fr"]} justify="center" spacing="4" w="100%" maxW="1120px" px="6" {...props}>
+        <C.Grid gap="4" templateColumns={["1fr", "1fr", "1fr 0.2fr 1fr"]} justify="center" spacing="4" w="100%" maxW="1120px" px="6" {...props}>
             <C.GridItem>
                 <Textarea 
-                    placeholder="Digite os dados para serem encriptados" 
+                    placeholder="Digite os dados para serem codificados" 
                     onChange={handleChangeData} 
                     value={data} 
-                    title="Dados:"
+                    title="Digite aqui com os dados:"
                 />
             </C.GridItem>
             <C.GridItem display="flex" justifyContent="center" alignItems="center">
-                <Button onClick={handleEncryptData}>Encriptar</Button>
+                <Button onClick={handleEncryptData} />
             </C.GridItem>
             <C.GridItem>
-                <Textarea value={encryptedData} isReadOnly title="Resultado:"/>
+                <Textarea value={encryptedData} isReadOnly title="Dados codificados:"/>
             </C.GridItem>
         </C.Grid>
     )

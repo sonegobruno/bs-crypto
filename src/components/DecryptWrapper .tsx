@@ -35,19 +35,19 @@ export function DecryptWrapper(props: C.StackProps) {
         >
             <C.GridItem>
                 <Textarea 
-                    placeholder="Digite os dados para serem encriptados" 
+                    placeholder="Digite os dados para serem decodificados" 
                     onChange={handleChangeData} 
                     value={data} 
-                    title="Dados:"
+                    title="Digite aqui com os dados:"
                 />
             </C.GridItem>
 
             <C.GridItem display="flex" justifyContent="center" alignItems="center">
-                <Button onClick={handleDecryptData}>Desencriptar</Button>
+                <Button onClick={handleDecryptData} />
             </C.GridItem>
 
             <C.GridItem>
-                <Textarea value={decryptedData} isReadOnly title="Resultado:"/>
+                <Textarea value={decryptedData} isReadOnly title="Dados decodificados:"/>
             </C.GridItem>
         </C.Grid>
     )

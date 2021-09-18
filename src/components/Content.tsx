@@ -22,14 +22,14 @@ export function Content() {
                         option={option}
                         optionSegment="encrypt"
                     >
-                        Encriptação
+                        Codificar
                     </SegmentButton>
                     <SegmentButton 
                         onClick={() => handleChangeOption('decrypt')} 
                         option={option}
                         optionSegment="decrypt"
                     >
-                        Desencriptação
+                        Decodificar
                     </SegmentButton>
                 </SegmentWrapper>
 
