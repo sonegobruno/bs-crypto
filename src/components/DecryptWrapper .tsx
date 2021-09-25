@@ -84,7 +84,13 @@ export function DecryptWrapper(props: C.StackProps) {
             </C.GridItem>
 
             <C.GridItem>
-                <Textarea value={decryptedData} isReadOnly title="Dados decodificados:"/>
+                <Textarea 
+                    canCopy 
+                    id="textarea" 
+                    value={decryptedData} 
+                    isReadOnly 
+                    title="Dados decodificados:"
+                />
             </C.GridItem>
         </C.Grid>
     )

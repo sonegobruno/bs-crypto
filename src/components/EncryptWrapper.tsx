@@ -73,7 +73,13 @@ export function EncryptWrapper(props: C.StackProps) {
                 <Button isLoading={loading} onClick={handleEncryptData} />
             </C.GridItem>
             <C.GridItem>
-                <Textarea value={encryptedData} isReadOnly title="Dados codificados:"/>
+                <Textarea 
+                    canCopy 
+                    value={encryptedData} 
+                    id="textarea" 
+                    isReadOnly 
+                    title="Dados codificados:"
+                />
             </C.GridItem>
         </C.Grid>
     )
